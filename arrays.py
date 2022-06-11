@@ -127,7 +127,7 @@ def merge_sort(A: list, ascending = True):
 			return A + A2[j:]
 		else:
 			return A
-	
+
 	if (len(A) <= 1):
 		return A
 	middle_index = len(A) // 2
@@ -135,31 +135,24 @@ def merge_sort(A: list, ascending = True):
 	right_sorted = merge_sort(A[middle_index:])
 	return merge(left_sorted, right_sorted)
 
-
-def test_sort(sort_algorithm):
+def test_sort(sort_algorithm, same_object = True):
 	print("Testing: ", sort_algorithm.__doc__)
 
-	print("#testcase #1:", end = '')
-	A = [4, 2, 5, 1, 3]
-	A_sorted = [1, 2, 3, 4, 5]
-	sort_algorithm(A)
-	print("OK" if (A == A_sorted) else "Fail")
+	arrays = ([[4, 2, 5, 1, 3], list(range(10, 20)) + list(range(0, 10)), [4, 2, 4, 2, 1]])
+	arrays_sorted = ([[1, 2, 3, 4, 5], list(range(0, 20)), [1, 2, 2, 4, 4]])
 
-	print("#testcase #2:", end = '')
-	A = list(range(10, 20)) + list(range(0, 10))
-	A_sorted = list(range(0, 20))
-	sort_algorithm(A)
-	print("OK" if (A == A_sorted) else "Fail")
-
-	print("#testcase #3:", end = '')
-	A = [4, 2, 4, 2, 1]
-	A_sorted = [1, 2, 2, 4, 4]
-	sort_algorithm(A)
-	print("OK" if (A == A_sorted) else "Fail")
-
+	for i in range(len(arrays)):
+		print("#testcase #{}:".format(i+1), end = '')
+		A = arrays[i]
+		A_sorted = arrays_sorted[i]
+		if same_object:
+			sort_algorithm(A)
+			print("OK" if (A == A_sorted) else "Fail")
+		else:
+			print("OK" if (sort_algorithm(A) == A_sorted) else "Fail")
 
 if __name__ == '__main__':
 	test_sort(insert_sort)
 	test_sort(choice_sort)
 	test_sort(bubble_sort)
-	test_sort(merge_sort)
+	test_sort(merge_sort, False)
