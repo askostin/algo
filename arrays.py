@@ -188,10 +188,11 @@ def test_sort(sort_algorithm, same_object = True):
 		A_sorted_asc = test_arrays_sorted_asc[i]
 		A_sorted_desc = test_arrays_sorted_desc[i]
 		if same_object:
+			# No declaration of 'inplace = True' since it is default value.
 			sort_algorithm(A)
 			print("sort in ascending order:",
 				  "OK" if (A == A_sorted_asc) else "Fail")
-			sort_algorithm(A, False)
+			sort_algorithm(A, ascending = False)
 			print("sort in descending order:",
 				  "OK" if (A == A_sorted_desc) else "Fail")
 		else:
