@@ -64,39 +64,48 @@ def add_element(x, array, right = True):
 	return
 
 
-def insert_sort(A: list, ascending = True):
+def insert_sort(A: list, ascending = True, inplace = True):
 	""" Sorting array by insertion sort. """
 	N = len(A)
+	C = A if inplace else [x for x in A]
 	for i in range(1, N):
-		tmp = A[i]
+		tmp = C[i]
 		j = i - 1
-		while j >= 0 and in_order(tmp, A[j], ascending):
-			A[j+1] = A[j]
+		while j >= 0 and in_order(tmp, C[j], ascending):
+			C[j+1] = C[j]
 			j = j - 1
-		A[j+1] = tmp
+		C[j+1] = tmp
+	if not inplace:
+		return C
 
 
-def choice_sort(A: list, ascending = True):
+def choice_sort(A: list, ascending = True, inplace = True):
 	""" Sorting array by choice sort. """
 	N = len(A)
+	C = A if inplace else [x for x in A]
 	for i in range(N):
-		tmp_val = A[i]
+		tmp_val = C[i]
 		tmp_idx = i
 		for j in range(i+1, N):
-			if in_order(A[j], tmp_val, ascending):
-				tmp_val = A[j]
+			if in_order(C[j], tmp_val, ascending):
+				tmp_val = C[j]
 				tmp_idx = j
 		if (tmp_idx != i) :
-			A[i], A[tmp_idx]  = A[tmp_idx], A[i]
+			C[i], C[tmp_idx] = C[tmp_idx], C[i]
+	if not inplace:
+		return C
 
 
-def bubble_sort(A: list, ascending = True):
+def bubble_sort(A: list, ascending = True, inplace = True):
 	""" Sorting array by bubble sort. """
 	N = len(A)
+	C = A if inplace else [x for x in A]
 	for i in range(N-1):
 		for j in range(N-1, i, -1):
-			if in_order(A[j], A[j-1], ascending):
-				A[j], A[j-1] = A[j-1], A[j]
+			if in_order(C[j], C[j-1], ascending):
+				C[j], C[j-1] = C[j-1], C[j]
+	if not inplace:
+		return C
 
 
 def count_sort(A: list, ascending = True):
@@ -151,13 +160,17 @@ def merge_sort(A: list, ascending = True, inplace = True):
 		return merge(L, R, ascending)
 
 
-def hoar_sort(A, ascending = True):
+def hoar_sort(A, ascending = True, inplace = True):
 	""" Sorting array by fast Hoar sort. """
+	C = A if inplace else [x for x in A]
 	if len(A) <= 1:
-		return # = return None
-	barrier = A[0]
+		if inplace:
+			return # = return None
+		else:
+			return C
+	barrier = C[0]
 	L, M, R = [], [], []
-	for x in A:
+	for x in C:
 		if in_order(x, barrier, ascending):
 			#add_element(x, L, ascending)
 			L.append(x)
@@ -171,8 +184,10 @@ def hoar_sort(A, ascending = True):
 	hoar_sort(R, ascending)
 	i = 0
 	for x in (L + M + R):
-		A[i] = x
+		C[i] = x
 		i += 1
+	if not inplace:
+		return C
 
 
 test_arrays = ([[4, 2, 5, 1, 3], list(range(10, 20)) + list(range(0, 10)), [4, 2, 4, 2, 1]])
@@ -204,8 +219,12 @@ def test_sort(sort_algorithm, same_object = True):
 
 if __name__ == '__main__':
 	test_sort(insert_sort)
+	test_sort(insert_sort, same_object = False)
 	test_sort(choice_sort)
+	test_sort(choice_sort, same_object = False)
 	test_sort(bubble_sort)
+	test_sort(bubble_sort, same_object = False)
 	test_sort(merge_sort)
 	test_sort(merge_sort, same_object = False)
 	test_sort(hoar_sort)
+	test_sort(hoar_sort, same_object = False)
