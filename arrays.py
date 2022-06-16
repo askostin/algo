@@ -190,6 +190,30 @@ def hoar_sort(A, ascending = True, inplace = True):
 		return C
 
 
+def is_sorted(A: list, ascending = True):
+	"""
+	Checks if the array @A is sorted in the specified order. Execution time is O(n).
+	"""
+	if not A:
+		return True
+	prev_elt = A[0]
+	for elt in A[1:]:
+		if in_order(prev_elt, elt, ascending) or (prev_elt == elt):
+			prev_elt = elt
+		else:
+			return False
+	return True
+
+
+def search_binary(x, A):
+	"""
+	In the sorted array find first and last occurences of elements @A[i] = @x and returns tuple (@left_bound, @right_bound), where @left_bound is the first element equal to @x, @right bound is the first element not equal to @x, so @A[left_bound, right_bound] is the subarray of @A, where all the elements are equal to @x.
+	"""
+	pass
+
+
+## Test sorting algorithms for correctness.
+
 test_arrays = ([[4, 2, 5, 1, 3], list(range(10, 20)) + list(range(0, 10)), [4, 2, 4, 2, 1]])
 test_arrays_sorted_asc = ([[1, 2, 3, 4, 5], list(range(0, 20)), [1, 2, 2, 4, 4]])
 test_arrays_sorted_desc = ([[5, 4, 3, 2, 1], list(range(19, -1, -1)), [4, 4, 2, 2, 1]])
