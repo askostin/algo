@@ -109,8 +109,8 @@ def bubble_sort(A: list, ascending = True, inplace = True):
 
 
 def count_sort(A: list, ascending = True):
-	"""
-	Using frequency analysis, Sort set of numbers for which we know the range of values.
+	"""Using frequency analysis, sort set of numbers
+	for which we know the range of values.
 	"""
 	pass
 
@@ -190,7 +190,7 @@ def hoar_sort(A, ascending = True, inplace = True):
 		return C
 
 
-def is_sorted(A: list, ascending = True):
+def is_sorted(A: list):
 	"""
 	Checks if the array @A is sorted in the specified order. Execution time is O(n).
 	"""
@@ -209,7 +209,7 @@ def is_sorted(A: list, ascending = True):
 			is_asc = True
 		else:
 			is_asc = False
-		for j in range(i, N)
+		for j in range(i, N):
 			if not (in_order(A[j-1], A[j], is_asc) or (A[j-1] == A[j])):
 				return (False, None)
 		return (True, is_asc)
@@ -227,63 +227,22 @@ def search_binary(x, A):
 		right = len(A)
 		while (right - left > 1):
 			middle = (left + right) // 2
-			if A[middle] ...
+			if x <= A[middle]:
+				right = middle
+			else:
+				left = middle
+		return left
 
 	def find_rbound(x, A):
-		pass
+		left = -1
+		right = len(A)
+		while (right - left > 1):
+			middle = (left + right) // 2
+			if x < A[middle]:
+				right = middle
+			else:
+				left = middle
+		return right
 
-	mid_idx = len(A) // 2
-
-	A_sorted, is_asc = is_sorted(A)
+#	A_sorted, is_asc = is_sorted(A)
 	return (find_lbound(x, A), find_rbound(x, A))
-
-
-## Test sorting algorithms for correctness.
-
-test_arrays =
-	([[4, 2, 5, 1, 3],
-	  list(range(10, 20)) + list(range(0, 10)),
-	  [4, 2, 4, 2, 1]])
-test_arrays_sorted_asc =
-	([[1, 2, 3, 4, 5],
-	  list(range(0, 20)),
-	  [1, 2, 2, 4, 4]])
-test_arrays_sorted_desc =
-	([[5, 4, 3, 2, 1],
-	  list(range(19, -1, -1)),
-	  [4, 4, 2, 2, 1]])
-
-def test_sort(sort_algorithm, same_object = True):
-	print("\nTesting:", sort_algorithm.__doc__[:-2], ' (inplace).' if same_object else '.', sep = '')
-
-	for i in range(len(test_arrays)):
-		print("#testcase #{}:".format(i+1), end = '\n')
-		A = test_arrays[i]
-		A_sorted_asc = test_arrays_sorted_asc[i]
-		A_sorted_desc = test_arrays_sorted_desc[i]
-		if same_object:
-			# No declaration of 'inplace = True' since it is default value.
-			sort_algorithm(A)
-			print("sort in ascending order:",
-				  "OK" if (A == A_sorted_asc) else "Fail")
-			sort_algorithm(A, ascending = False)
-			print("sort in descending order:",
-				  "OK" if (A == A_sorted_desc) else "Fail")
-		else:
-			print("sort in ascending order:",
-				  "OK" if (sort_algorithm(A, inplace = False) == A_sorted_asc) else "Fail")
-			print("sort in descending order:",
-				  "OK" if (sort_algorithm(A, ascending = False, inplace = False) == A_sorted_desc) else "Fail")
-
-
-if __name__ == '__main__':
-	test_sort(insert_sort)
-	test_sort(insert_sort, same_object = False)
-	test_sort(choice_sort)
-	test_sort(choice_sort, same_object = False)
-	test_sort(bubble_sort)
-	test_sort(bubble_sort, same_object = False)
-	test_sort(merge_sort)
-	test_sort(merge_sort, same_object = False)
-	test_sort(hoar_sort)
-	test_sort(hoar_sort, same_object = False)
