@@ -3,17 +3,17 @@ from arrays import *
 ## Test sorting algorithms for correctness.
 
 test_arrays = \
-	([[4, 2, 5, 1, 3],
-	  list(range(10, 20)) + list(range(0, 10)),
-	  [4, 2, 4, 2, 1]])
+	[[4, 2, 5, 1, 3],
+	 list(range(10, 20)) + list(range(0, 10)),
+	 [4, 2, 4, 2, 1]]
 test_arrays_sorted_asc = \
-	([[1, 2, 3, 4, 5],
-	  list(range(0, 20)),
-	  [1, 2, 2, 4, 4]])
+	[[1, 2, 3, 4, 5],
+	 list(range(0, 20)),
+	 [1, 2, 2, 4, 4]]
 test_arrays_sorted_desc = \
-	([[5, 4, 3, 2, 1],
-	  list(range(19, -1, -1)),
-	  [4, 4, 2, 2, 1]])
+	[[5, 4, 3, 2, 1],
+	 list(range(19, -1, -1)),
+	 [4, 4, 2, 2, 1]]
 
 def apply_sort_algo(sort_algorithm, A, A_sorted_correct, ascending, inplace):
 	order = 'ascending' if ascending else 'descending'
@@ -32,7 +32,7 @@ def test_sort(sort_algorithm, inplace = True):
 		  sep = '')
 
 	for i in range(len(test_arrays)):
-		print("#testcase #{}:".format(i+1), end = '\n')
+		print("testcase #{}:".format(i+1), end = '\n')
 		A = test_arrays[i]
 		A_sorted_asc = test_arrays_sorted_asc[i]
 		A_sorted_desc = test_arrays_sorted_desc[i]
@@ -50,7 +50,6 @@ def test_sort(sort_algorithm, inplace = True):
 			ascending = False,
 			inplace = inplace
 		)
-
 
 '''
 		if inplace:
@@ -79,7 +78,32 @@ def test_sort(sort_algorithm, inplace = True):
 '''
 
 
+def test_is_sorted():
+	print("\nTesting is_sorted():")
+	for i in range(len(test_arrays)):
+		print("testcase #{}:".format(i+1), end = '\n')
+		A = test_arrays[i]
+		A_sorted_asc = test_arrays_sorted_asc[i]
+		A_sorted_desc = test_arrays_sorted_desc[i]
+
+		if (is_sorted(A) == (False, None)):
+			print("OK")
+		else:
+			print("Fail")
+
+		if (is_sorted(A_sorted_asc) == (True, True)):
+			print("OK")
+		else:
+			print("Fail")
+
+		if (is_sorted(A_sorted_desc) == (True, False)):
+			print("OK")
+		else:
+			print("Fail")
+
+
 if __name__ == '__main__':
+	'''
 	test_sort(insert_sort)
 	test_sort(insert_sort, inplace = False)
 	test_sort(choice_sort)
@@ -90,3 +114,5 @@ if __name__ == '__main__':
 	test_sort(merge_sort, inplace = False)
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
+	'''
+	test_is_sorted()

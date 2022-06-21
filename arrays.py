@@ -191,8 +191,7 @@ def hoar_sort(A, ascending = True, inplace = True):
 
 
 def is_sorted(A: list):
-	"""
-	Checks if the array @A is sorted in the specified order. Execution time is O(n).
+	"""Checks if the array @A is sorted in the specified order. Execution time is O(n).
 	"""
 	N = len(A)
 	if (N < 2):
@@ -200,22 +199,18 @@ def is_sorted(A: list):
 	# Flag indicates if first two non-equal elements are in asc/desc order:
 	is_asc = None
 	i = 1
-	while (A[i] == A[i-1]) and (i < N):
+	while ((A[i] == A[i-1]) and (i < N)):
 		i += 1
 	if (i == N):
 		return (True, None)
-	else:
-		if A[i] > A[i-1]:
-			is_asc = True
-		else:
-			is_asc = False
-		for j in range(i, N):
-			if not (in_order(A[j-1], A[j], is_asc) or (A[j-1] == A[j])):
-				return (False, None)
-		return (True, is_asc)
+	is_asc = (A[i-1] < A[i])
+	for j in range(i+1, N):
+		if in_order(A[j-1], A[j], not is_asc):
+			return (False, None)
+	return (True, is_asc)
 
 
-def search_binary(x, A):
+def search_binary(x, A, is_asc):
 	"""
 	In the sorted array find first and last occurences of elements
 	@A[i] = @x and returns tuple (@left_bound, @right_bound),
@@ -227,7 +222,11 @@ def search_binary(x, A):
 		right = len(A)
 		while (right - left > 1):
 			middle = (left + right) // 2
-			if x <= A[middle]:
+			if is_asc:
+				compare = (x <= A[middle])
+			else:
+				compare = (x >= A[middle])
+			if compare:
 				right = middle
 			else:
 				left = middle
@@ -238,11 +237,14 @@ def search_binary(x, A):
 		right = len(A)
 		while (right - left > 1):
 			middle = (left + right) // 2
-			if x < A[middle]:
+			if is_asc:
+				compare = (x < A[middle])
+			else:
+				compare = (x > A[middle])
+			if compare:
 				right = middle
 			else:
 				left = middle
 		return right
 
-#	A_sorted, is_asc = is_sorted(A)
 	return (find_lbound(x, A), find_rbound(x, A))
