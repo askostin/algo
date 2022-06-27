@@ -30,3 +30,7 @@ def match(str, pat: str)-> bool:
 		pass
 
 	return match_aux(str, pat, 0, 0) 
+
+
+# def check_paren(...)
+# check the expressin which have parenthesises for pair matching
