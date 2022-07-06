@@ -44,7 +44,8 @@ def test_circ_shift():
 
 def sieve_erato(n: int):
 	"""
-	Create the list of prime numbers in the range [2, n] using the Sieve of Eratosthenes.
+	Create the list of prime numbers in the range [2, n] using
+	the Sieve of Eratosthenes.
 	"""
 	A = [True] * n
 	for k in range (2, n + 1):
@@ -191,7 +192,8 @@ def hoar_sort(A, ascending = True, inplace = True):
 
 
 def is_sorted(A: list):
-	"""Checks if the array @A is sorted in the specified order. Execution time is O(n).
+	"""Checks if the array @A is sorted in the specified order.
+	Execution time is O(n).
 	"""
 	N = len(A)
 	if (N < 2):
