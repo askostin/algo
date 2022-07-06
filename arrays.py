@@ -248,3 +248,16 @@ def search_binary(x, A, is_asc):
 		return right
 
 	return (find_lbound(x, A), find_rbound(x, A))
+
+
+def max_mono_subarray(A: list, ascending = True, strict_mono = True):
+	""" Find maximal monotonous ascending (or descending) subarray of @A.
+
+	Paramenters:
+	@ascending - if we look for ascending or descending subarray
+	@strict_mono - if the subarray is strictly monotonous, i.e.
+		if sequence [a_1, a_2, ..., a_n] is ascending:
+		- a_{n} < a_{n+1} for any n in strictly monotonous seqence,
+		- a_{n} <= a_{n+1} for any n in non-strictly monotonous sequence.
+	"""
+	pass
