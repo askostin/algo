@@ -1,3 +1,5 @@
+import operator
+
 def circ_shift(A: list, direction = 'right', steps = 1):
 	"""
 		Shift all the elements of the array.
@@ -252,7 +254,7 @@ def search_binary(x, A, is_asc):
 	return (find_lbound(x, A), find_rbound(x, A))
 
 
-def max_monotonous_subarray(A: list, ascending = True, strict_mono = True):
+def subarray_max_mono(A: list, ascending = True, strict_mono = True):
 	""" Find maximal monotonous ascending (or descending) subarray of @A.
 
 	Paramenters:
@@ -265,7 +267,18 @@ def max_monotonous_subarray(A: list, ascending = True, strict_mono = True):
 	pass
 
 
-def max_common_subarray(A, B: list):
+def subarray_max_common(A, B: list) -> list:
 	""" For two given arrays find their maximal common subarray.
+	"""
+	M = len(A)
+	N = len(B)
+	pass
+
+def subarray_nsep_max_diff(A:list) -> list:
+	"""For numeric sequence find nonseparate subsequence of elements
+	(number) for which difference between last and first elements
+	is maximal -- like our sequence is a row of daily prces,
+	and we want to get maximal profit buying at one price
+	and selling at another.
 	"""
 	pass
