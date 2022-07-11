@@ -38,21 +38,39 @@ def grasshoper_best_path(prices: list, steps = [1, 2]):
 	"""Find path from point 0 to point N with minimal cost,
 	so we have start point and N other points [1,...,N].
 	Parameters:
-		prices - list of prices of jump from (i-1)-th point to i-th, i = [1...N]
+		prices - list of prices of jump from (i-1)-th point to i-th
 		steps - list of jump values
 	"""
 	N = len(prices)
+	prices = [0] + prices
+	steps = list(set(sorted(steps)))
 	for s in steps:
 		if (s <= 0):
 			raise ValueError("All step sizes have to be positive integers.")
-		if (max(steps) > N // 2):
+		if (max(steps) > (N // 2 + 1)):
 			raise ValueError("Step size ({}) too big.".format(max(steps)))
 
-	C = [float("-inf"), prices[0], prices[0] + prices[1]] + [None]*(N-2)
-	for i in range(3, N+1):
-		steps_possible = [s for s in steps if (i-s > 0)]
-		C[i] += price[i] + min([C[i-s] for s in steps_possible])
-	return C[N]
+	C = [0, prices[1]] + [None]*(N-1)
+	for i in range(2, N+1):
+		steps_possible = [s for s in steps if (i-s >= 0)]
+		C[i] = prices[i] + min([C[i-s] for s in steps_possible])
+
+	def find_path(point, points):
+		if point == 0:
+			return points
+		best_prev_point = point - steps[0]
+		for s in steps[1:]:
+			prev_point = point - s
+			if (C[prev_point] < C[best_prev_point]):
+				best_prev_point = prev_point
+		return(
+			find_path(
+				best_prev_point,
+				[best_prev_point] + points
+			)
+		)
+
+	return (find_path(N, [N])[1:], C[N])
 
 
 def king_count_paths(M, N: int, *, ret_all = False):

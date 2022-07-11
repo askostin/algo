@@ -25,7 +25,17 @@ def test_grasshoper_count_paths():
 
 
 def test_grasshoper_best_path():
-	pass
+	def test_result(i, is_passed):
+		if is_passed:
+			print("Test #{} passed".format(i))
+		else:
+			print("Test #{} failed".format(i))
+
+	test_result(1, grasshoper_best_path([1,1,1]) == ([2,3], 2) or \
+		grasshoper_best_path([1,1,1]) == ([1,3], 2))
+	test_result(2, grasshoper_best_path([1,1,1,1]) == ([2,4], 2))
+	test_result(3, grasshoper_best_path([2,1,2,1]) == ([2,4], 2))
+
 
 def test_king_count_paths():
 	def size(num:int) -> int:
