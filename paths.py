@@ -3,8 +3,8 @@
 # count number of possible paths.
 # Here we implement some algorithms of 'dynamic programming'.
 
-# Добавить функцию # прыжки кузнечика - количество способов
-def grasshoper_paths_quantity(N: int, steps = [1, 2, 3], forbidden = [])
+
+def grasshoper_count_paths(N: int, steps = [1, 2, 3], forbidden = []):
 	"""Find number of possible path variants in the 1D road with @N+1 points
 	(start has index "0", end -- "@N"), where we can make jumps with lenghts
 	stated in @steps list (max step is @N//10).
@@ -24,19 +24,19 @@ def grasshoper_paths_quantity(N: int, steps = [1, 2, 3], forbidden = [])
 	for s in steps:
 		if (s <= 0):
 			raise ValueError("All step sizes have to be positive integers.")
-	K = [0, 1] + [0]*(N-1)
+	pths_to_first = 0 if (1 in forbidden) else 1
+	K = [1, pths_to_first] + [0]*(N-1)
 	for i in range(2, N+1):
-		K[i] = 0
-		for s in [s for s in steps if (i-s > 0)]:
+		for s in [s for s in steps if (i-s >= 0)]:
 			if not ((i-s) in forbidden):
 				K[i] += K[i-s]
-		K[i] = K[i] or 0
+	K[0] = 0
 	return K[N]
 
-# Добавить функцию # прыжки кузнечика - наиболее выгодная тракетория
+
 def grasshoper_best_path(prices: list, steps = [1, 2]):
 	"""Find path from point 0 to point N with minimal cost,
-	so we have start point and N other points.
+	so we have start point and N other points [1,...,N].
 	Parameters:
 		prices - list of prices of jump from (i-1)-th point to i-th, i = [1...N]
 		steps - list of jump values
@@ -54,6 +54,25 @@ def grasshoper_best_path(prices: list, steps = [1, 2]):
 		C[i] += price[i] + min([C[i-s] for s in steps_possible])
 	return C[N]
 
-# Добавить функцию # траектория короля
 
-# Добавит
+def king_count_paths(M, N: int, *, ret_all = False):
+	"""Count the number of ways how the king, starting from one corner
+	of the chess plate with size N*M (e.g. a1 or (0,0)) will reach diagonnaly
+	opposite corner (h8 or (7,7) for classic plate 8x8).
+	The King can go only in 2 directions: if a1 is top left corner place,
+	the King can go only one filed down or right, and it have to reach
+	low right corner h8.
+	"""
+	K = [[0]*(N+1) for i in range(M+1)]
+	K[1][1] = 1
+	for i in range(2, M+1):
+		K[i][1] = 1
+	for j in range(2, N+1):
+		K[1][j] = 1
+	for i in range(2, M+1):
+		for j in range(2, N+1):
+			K[i][j] = K[i-1][j] + K[i][j-1]
+	if ret_all:
+		return [row[1:] for row in K[1:]]
+	else:
+		return K[M][N]

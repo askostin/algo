@@ -2,7 +2,27 @@
 from .paths import *
 
 def test_grasshoper_count_paths():
-	pass
+	args_sets = [
+		[5, [1, 2], [], 8],
+		[5, [1, 2, 3], [1, 2, 3], 0],
+		[6, [1, 2, 3], [], 24],
+		[6, [1, 2], [2, 4], 1],
+		[6, [1, 2, 3], [3], 8]
+		]
+
+	def aux(i, *args):
+		tmp = grasshoper_count_paths(args[0], args[1], args[2])
+		s1 = 'passed' if (tmp == args[3]) else 'failed'
+		s2 = "forbidden = {}, ".format(args[2]) if args[2] else ''
+		s3 = '' if (tmp == args[3]) else ", have to be {}".format(args[3])
+		s = "Test #{} {}:\n".format(i+1, s1) + \
+			"for N = {}, steps = {}, {}".format(args[0], args[1], s2) + \
+			"the answer is {}{}\n".format(tmp, s3)
+		return s
+
+	for i in range(len(args_sets)):
+		print(aux(i, *args_sets[i]))
+
 
 def test_grasshoper_best_path():
 	pass
