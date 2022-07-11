@@ -15,6 +15,31 @@ test_arrays_sorted_desc = \
 	 list(range(19, -1, -1)),
 	 [4, 4, 2, 2, 1]]
 
+
+def test_is_sorted():
+	print("\nTesting is_sorted():")
+	for i in range(len(test_arrays)):
+		print("testcase #{}:".format(i+1), end = '\n')
+		A = test_arrays[i]
+		A_sorted_asc = test_arrays_sorted_asc[i]
+		A_sorted_desc = test_arrays_sorted_desc[i]
+
+		if (is_sorted(A) == (False, None)):
+			print("OK")
+		else:
+			print("Fail")
+
+		if (is_sorted(A_sorted_asc) == (True, True)):
+			print("OK")
+		else:
+			print("Fail")
+
+		if (is_sorted(A_sorted_desc) == (True, False)):
+			print("OK")
+		else:
+			print("Fail")
+
+
 def apply_sort_algo(sort_algorithm, A, A_sorted_correct, ascending, inplace):
 	order = 'ascending' if ascending else 'descending'
 	if inplace:
@@ -51,68 +76,25 @@ def test_sort(sort_algorithm, inplace = True):
 			inplace = inplace
 		)
 
-'''
-		if inplace:
-			# No declaration of 'inplace = True' since it is default value.
-			sort_algorithm(A)
-			print("sort in ascending order:",
-				  "OK" if (A == A_sorted_asc) else "Fail")
-			sort_algorithm(A, ascending = False)
-			print("sort in descending order:",
-				  "OK" if (A == A_sorted_desc) else "Fail")
-		else:
-			if (sort_algorithm(A,
-							   inplace = False) == A_sorted_asc):
-				tmp = "OK"
-			else:
-				tmp = "Fail"
-			print("sort in ascending order:", tmp)
-			if (sort_algorithm(A,
-							   ascending = False,
-							   inplace = False)
-				== A_sorted_desc):
-				tmp = "OK"
-			else:
-				tmp = "Fail"
-			print("sort in descending order:", tmp)
-'''
-
-
-def test_is_sorted():
-	print("\nTesting is_sorted():")
-	for i in range(len(test_arrays)):
-		print("testcase #{}:".format(i+1), end = '\n')
-		A = test_arrays[i]
-		A_sorted_asc = test_arrays_sorted_asc[i]
-		A_sorted_desc = test_arrays_sorted_desc[i]
-
-		if (is_sorted(A) == (False, None)):
-			print("OK")
-		else:
-			print("Fail")
-
-		if (is_sorted(A_sorted_asc) == (True, True)):
-			print("OK")
-		else:
-			print("Fail")
-
-		if (is_sorted(A_sorted_desc) == (True, False)):
-			print("OK")
-		else:
-			print("Fail")
-
 
 if __name__ == '__main__':
-	'''
+	print("Testing is_sorted():")
+	test_is_sorted()
+
+	print("Testing insert_sort():")
 	test_sort(insert_sort)
 	test_sort(insert_sort, inplace = False)
+	print("Testing choice_sort():")
 	test_sort(choice_sort)
 	test_sort(choice_sort, inplace = False)
+	print("Testing bubble_sort():")
 	test_sort(bubble_sort)
 	test_sort(bubble_sort, inplace = False)
+	print("Testing merge_sort():")
 	test_sort(merge_sort)
 	test_sort(merge_sort, inplace = False)
+	print("Testing hoar_sort():")
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
-	'''
-	test_is_sorted()
+
+

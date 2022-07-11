@@ -48,3 +48,14 @@ def test_king_count_paths():
 				' '*(max_size - size(num) + 1) + str(num),
 				end = ' ')
 		print("\n")
+
+
+if __name__ == '__main__':
+	print("Testing grasshoper_count_paths():")
+	test_grasshoper_count_paths()
+
+	print("Testing grasshoper_best_path():")
+	test_grasshoper_best_path()
+
+	print("Tesing king_count_paths():")
+	test_king_count_paths()
