@@ -1,4 +1,4 @@
-from arrays import *
+from algo.arrays import *
 
 ## Test sorting algorithms for correctness.
 
