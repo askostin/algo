@@ -27,4 +27,4 @@ def generate_permutations(N: int):
 			aux(M-1, prefix)
 			prefix.pop()
 
-	aux(N)		
+	aux(N)
