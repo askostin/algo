@@ -95,7 +95,11 @@ def test_sort(sort_algorithm, inplace = True):
 
 # Add test_search_binary()
 
-# Add test_
+# Add test_subarray_mono_max()
+
+# Add test_subarray_common_max()
+
+# Add test_subarray_nsep_max_diff()
 
 if __name__ == '__main__':
 	print("Testing is_sorted():")
