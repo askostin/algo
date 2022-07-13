@@ -1,44 +1,40 @@
 from algo.arrays import *
 
 
-def test_circ_shift():
-	A = [1, 2, 3, 4]
-	if circ_shift(A, 'right', 2) == [3, 4, 1, 2]:
-		return "Test 1 passed"
-	else :
-		return "Test 1 failed"
-	if circ_shift(A, 'left', 1) == [2, 3, 4, 1]:
-		return "Test 2 passed"
-	else :
-		return "Test 2 failed"
-	if circ_shift(A, 4) == A:
-		return "Test 3 passed"
-	else :
-		return "Test 3 failed"
+def help():
+	print("# Sorting functions: #")
+	print("test_is_sorted()")
+	print("test_insert_sort()")
+	print("test_choice_sort()")
+	print("test_bubble_sort()")
+	print("test_merge_sort()")
+	print("test_hoar_sort()")
+	print("######################")
+	print("test_circ_shift()")
+	print("test_search_binary()")
+	print("test_subarray_mono_max()")
+	print("test_subarray_common_max()")
+	print("test_subarray_nsep_max_diff()")
 
 
-def test_is_sorted():
-	print("\nTesting is_sorted():")
-	for i in range(len(test_arrays)):
-		print("testcase #{}:".format(i+1), end = '\n')
-		A = test_arrays[i]
-		A_sorted_asc = test_arrays_sorted_asc[i]
-		A_sorted_desc = test_arrays_sorted_desc[i]
-
-		if (is_sorted(A) == (False, None)):
-			print("OK")
-		else:
-			print("Fail")
-
-		if (is_sorted(A_sorted_asc) == (True, True)):
-			print("OK")
-		else:
-			print("Fail")
-
-		if (is_sorted(A_sorted_desc) == (True, False)):
-			print("OK")
-		else:
-			print("Fail")
+def general_test(fun, input, output_cor):
+	if (len(input) != len(output_cor)):
+		raise ValueError('Input and ouput must have the same size.')
+	if (isinstance(input[0], list)):
+		output = [fun(*val) for val in input]
+	else:
+		output = [fun(val) for val in input]
+	flag = True
+	print("\nTesting {}():".format(fun.__name__))
+	for i, o, o_c in zip(input, output, output_cor):
+		if (o != o_c):
+			flag = False
+			print(
+				"Fail: {}({}) = {}, must be {}"\
+				.format(fun.__name__,i, o, o_c)
+			)
+	if flag:
+		print("Test passed")
 
 
 ## Test sorting algorithms for correctness.
@@ -68,9 +64,9 @@ def apply_sort_algo(sort_algorithm, A, A_sorted_correct, ascending, inplace):
 	print("sort in", order, "order:", result)
 
 def test_sort(sort_algorithm, inplace = True):
-	print("\nTesting:",
-		  sort_algorithm.__doc__[:-2],
-		  ' (inplace).' if inplace else '.',
+	print("\nTesting ",
+		  sort_algorithm.__name__,
+		  '() (inplace):' if inplace else '() (non-inplace):',
 		  sep = '')
 
 	for i in range(len(test_arrays)):
@@ -93,6 +89,25 @@ def test_sort(sort_algorithm, inplace = True):
 			inplace = inplace
 		)
 
+
+## Tests for non-sorting functions
+
+def test_circ_shift():
+	A = [1, 2, 3, 4]
+	if circ_shift(A, 'right', 2) == [3, 4, 1, 2]:
+		return "Test 1 passed"
+	else :
+		return "Test 1 failed"
+	if circ_shift(A, 'left', 1) == [2, 3, 4, 1]:
+		return "Test 2 passed"
+	else :
+		return "Test 2 failed"
+	if circ_shift(A, 4) == A:
+		return "Test 3 passed"
+	else :
+		return "Test 3 failed"
+
+
 # Add test_search_binary()
 
 # Add test_subarray_mono_max()
@@ -105,19 +120,14 @@ if __name__ == '__main__':
 	print("Testing is_sorted():")
 	test_is_sorted()
 
-	print("Testing insert_sort():")
 	test_sort(insert_sort)
 	test_sort(insert_sort, inplace = False)
-	print("Testing choice_sort():")
 	test_sort(choice_sort)
 	test_sort(choice_sort, inplace = False)
-	print("Testing bubble_sort():")
 	test_sort(bubble_sort)
 	test_sort(bubble_sort, inplace = False)
-	print("Testing merge_sort():")
 	test_sort(merge_sort)
 	test_sort(merge_sort, inplace = False)
-	print("Testing hoar_sort():")
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
 

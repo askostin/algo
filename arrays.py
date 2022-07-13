@@ -29,8 +29,7 @@ def circ_shift(A: list, direction = 'right', steps = 1):
 
 
 def sieve_erato(n: int):
-	"""
-	Create the list of prime numbers in the range [2, n] using
+	"""Create the list of prime numbers in the range [2, n] using
 	the Sieve of Eratosthenes.
 	"""
 	A = [True] * n
@@ -240,7 +239,7 @@ def search_binary(x, A, is_asc):
 	return (find_lbound(x, A), find_rbound(x, A))
 
 
-def subarray_max_mono(A: list, ascending = True, strict_mono = True):
+def subarray_mono_max(A: list, ascending = True, strict_mono = True):
 	""" Find maximal monotonous ascending (or descending) subarray of @A.
 
 	Paramenters:
@@ -253,7 +252,7 @@ def subarray_max_mono(A: list, ascending = True, strict_mono = True):
 	pass
 
 
-def subarray_max_common(A, B: list) -> list:
+def subarray_common_max(A, B: list) -> list:
 	""" For two given arrays find their maximal common subarray.
 	"""
 	F = [[0]*(len(B)+1) for i in range(len(A)+1)]
@@ -263,9 +262,12 @@ def subarray_max_common(A, B: list) -> list:
 				F[i][j] = 1 + F[i-1][j-1]
 			else:
 				F[i][j] = max(F[i-1][j], F[i][j-1])
-	# search of subarray itself
-		....
-	return F[-1][-1]
+	subarray = []
+	while (F[len(A)][j] > 0) and (j > 0):
+		if F[len(A)][j] > F[len(A)][j-1]:
+			subarray = [B[j-1]] + subarray
+		j = j - 1
+	return subarray
 
 
 def subarray_nsep_max_diff(A:list) -> list:
