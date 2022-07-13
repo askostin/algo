@@ -1,19 +1,20 @@
 from algo.arrays import *
 
-## Test sorting algorithms for correctness.
 
-test_arrays = \
-	[[4, 2, 5, 1, 3],
-	 list(range(10, 20)) + list(range(0, 10)),
-	 [4, 2, 4, 2, 1]]
-test_arrays_sorted_asc = \
-	[[1, 2, 3, 4, 5],
-	 list(range(0, 20)),
-	 [1, 2, 2, 4, 4]]
-test_arrays_sorted_desc = \
-	[[5, 4, 3, 2, 1],
-	 list(range(19, -1, -1)),
-	 [4, 4, 2, 2, 1]]
+def test_circ_shift():
+	A = [1, 2, 3, 4]
+	if circ_shift(A, 'right', 2) == [3, 4, 1, 2]:
+		return "Test 1 passed"
+	else :
+		return "Test 1 failed"
+	if circ_shift(A, 'left', 1) == [2, 3, 4, 1]:
+		return "Test 2 passed"
+	else :
+		return "Test 2 failed"
+	if circ_shift(A, 4) == A:
+		return "Test 3 passed"
+	else :
+		return "Test 3 failed"
 
 
 def test_is_sorted():
@@ -38,6 +39,22 @@ def test_is_sorted():
 			print("OK")
 		else:
 			print("Fail")
+
+
+## Test sorting algorithms for correctness.
+
+test_arrays = \
+	[[4, 2, 5, 1, 3],
+	 list(range(10, 20)) + list(range(0, 10)),
+	 [4, 2, 4, 2, 1]]
+test_arrays_sorted_asc = \
+	[[1, 2, 3, 4, 5],
+	 list(range(0, 20)),
+	 [1, 2, 2, 4, 4]]
+test_arrays_sorted_desc = \
+	[[5, 4, 3, 2, 1],
+	 list(range(19, -1, -1)),
+	 [4, 4, 2, 2, 1]]
 
 
 def apply_sort_algo(sort_algorithm, A, A_sorted_correct, ascending, inplace):
@@ -76,6 +93,9 @@ def test_sort(sort_algorithm, inplace = True):
 			inplace = inplace
 		)
 
+# Add test_search_binary()
+
+# Add test_
 
 if __name__ == '__main__':
 	print("Testing is_sorted():")

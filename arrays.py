@@ -28,22 +28,6 @@ def circ_shift(A: list, direction = 'right', steps = 1):
 	return tmp
 
 
-def test_circ_shift():
-	A = [1, 2, 3, 4]
-	if circ_shift(A, 'right', 2) == [3, 4, 1, 2]:
-		return "Test 1 passed"
-	else :
-		return "Test 1 failed"
-	if circ_shift(A, 'left', 1) == [2, 3, 4, 1]:
-		return "Test 2 passed"
-	else :
-		return "Test 2 failed"
-	if circ_shift(A, 4) == A:
-		return "Test 3 passed"
-	else :
-		return "Test 3 failed"
-
-
 def sieve_erato(n: int):
 	"""
 	Create the list of prime numbers in the range [2, n] using
@@ -58,13 +42,36 @@ def sieve_erato(n: int):
 	for k in range (n) :
 		print(k, '-', "Prime" if A[k] else "Not prime")
 
+
 def in_order(n1, n2, ascending = True):
 	""" Check if the order of two given numbers is correct. """
 	return ((n1 < n2) if ascending else (n1 > n2))
 
+
 def add_element(x, array, right = True):
 	array.insert((len(array) if right else 0), x)
 	return
+
+
+def is_sorted(A: list):
+	"""Checks if the array @A is sorted in the specified order.
+	Execution time is O(n).
+	"""
+	N = len(A)
+	if (N < 2):
+		return (True, None)
+	# Flag indicates if first two non-equal elements are in asc/desc order:
+	is_asc = None
+	i = 1
+	while ((A[i] == A[i-1]) and (i < N)):
+		i += 1
+	if (i == N):
+		return (True, None)
+	is_asc = (A[i-1] < A[i])
+	for j in range(i+1, N):
+		if in_order(A[j-1], A[j], not is_asc):
+			return (False, None)
+	return (True, is_asc)
 
 
 def insert_sort(A: list, ascending = True, inplace = True):
@@ -193,27 +200,6 @@ def hoar_sort(A, ascending = True, inplace = True):
 		return C
 
 
-def is_sorted(A: list):
-	"""Checks if the array @A is sorted in the specified order.
-	Execution time is O(n).
-	"""
-	N = len(A)
-	if (N < 2):
-		return (True, None)
-	# Flag indicates if first two non-equal elements are in asc/desc order:
-	is_asc = None
-	i = 1
-	while ((A[i] == A[i-1]) and (i < N)):
-		i += 1
-	if (i == N):
-		return (True, None)
-	is_asc = (A[i-1] < A[i])
-	for j in range(i+1, N):
-		if in_order(A[j-1], A[j], not is_asc):
-			return (False, None)
-	return (True, is_asc)
-
-
 def search_binary(x, A, is_asc):
 	"""
 	In the sorted array find first and last occurences of elements
@@ -277,7 +263,8 @@ def subarray_max_common(A, B: list) -> list:
 				F[i][j] = 1 + F[i-1][j-1]
 			else:
 				F[i][j] = max(F[i-1][j], F[i][j-1])
-	# add search of subarray itself
+	# search of subarray itself
+		....
 	return F[-1][-1]
 
 
