@@ -254,17 +254,17 @@ def lms(A: list, asc = True, strict_mono = True):
 	"""
 	if len(A) == 1:
 		return 1
-	start = 0
-	end = 0
-	L = 1
+	start = end = 0
+	tmp_start = tmp_end = 0
+	tmp_L = L = 1
 	is_first = True
 	for i in range(1, len(A)):
 		if in_order(A[i-1], A[i], asc, strict_mono):
 			if is_first:
 				tmp_start = i-1
-				tmp_L = 1
-			tmp_end = i
+				is_first = False
 			tmp_L += 1
+			tmp_end = i
 		else:
 			if (tmp_L > L):
 				L = tmp_L
@@ -273,11 +273,12 @@ def lms(A: list, asc = True, strict_mono = True):
 			is_first = True
 			tmp_L = 1
 			tmp_start = i
-	return A[start, end+1]
+	return A[start:end+1]
 
 
 def lcs(A, B: list) -> list:
-	""" For two given sequences find their longest common subsequenc.
+	""" For two given sequences find their longest common subsequence
+	using Needleman-Wunsch algorithm.
 	"""
 	F = [[0]*(len(B)+1) for i in range(len(A)+1)]
 	for i in range(1, len(A)+1):
