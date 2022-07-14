@@ -113,6 +113,16 @@ def test_circ_shift():
 # Add test_subarray_mono_max()
 
 # Add test_subarray_common_max()
+def test_subarray_common_max():
+	general_test(
+		subarray_common_max,
+		[[[1, 2, 3, 0, 1], [4, 2, 2, 5, 6]],
+		 [[1, 2, 2, 3 ,4, 1, 1], [6, 2, 1, 5]],
+		 [[-1, 0, 1, 0], [4, 3, -2, 0]]],
+		[[2],
+		 [1, 2],
+		 [0]]
+	)
 
 # Add test_subarray_nsep_max_diff()
 
