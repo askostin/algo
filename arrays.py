@@ -267,7 +267,8 @@ def subarray_common_max(A, B: list) -> list:
 		if F[len(A)][j] > F[len(A)][j-1]:
 			subarray = [B[j-1]] + subarray
 		j = j - 1
-	return subarray.sort()
+	subarray.sort()
+	return subarray
 
 
 def subarray_nsep_max_diff(A:list) -> list:
