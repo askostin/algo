@@ -42,9 +42,12 @@ def sieve_erato(n: int):
 		print(k, '-', "Prime" if A[k] else "Not prime")
 
 
-def in_order(n1, n2, ascending = True):
+def in_order(n1, n2, asc = True, strict = True):
 	""" Check if the order of two given numbers is correct. """
-	return ((n1 < n2) if ascending else (n1 > n2))
+	if strict:
+		return ((n1 < n2) if asc else (n1 > n2))
+	else:
+		return ((n1 <= n2) if asc else (n1 >= n2))
 
 
 def add_element(x, array, right = True):
@@ -239,17 +242,38 @@ def search_binary(x, A, is_asc):
 	return (find_lbound(x, A), find_rbound(x, A))
 
 
-def lms(A: list, ascending = True, strict_mono = True):
+def lms(A: list, asc = True, strict_mono = True):
 	""" Find longest monotonous ascending (or descending) subsequence of @A.
 
 	Paramenters:
-	@ascending - if we look for ascending or descending subsequence
+	@asc - if we look for ascending or descending subsequence
 	@strict_mono - if the subsequence is strictly monotonous, i.e.
 		if sequence [a_1, a_2, ..., a_n] is ascending:
 		- a_{n} < a_{n+1} for any n in strictly monotonous seqence,
 		- a_{n} <= a_{n+1} for any n in non-strictly monotonous sequence.
 	"""
-	pass
+	if len(A) == 1:
+		return 1
+	start = 0
+	end = 0
+	L = 1
+	is_first = True
+	for i in range(1, len(A)):
+		if in_order(A[i-1], A[i], asc, strict_mono):
+			if is_first:
+				tmp_start = i-1
+				tmp_L = 1
+			tmp_end = i
+			tmp_L += 1
+		else:
+			if (tmp_L > L):
+				L = tmp_L
+				start = tmp_start
+				end = tmp_end
+			is_first = True
+			tmp_L = 1
+			tmp_start = i
+	return A[start, end+1]
 
 
 def lcs(A, B: list) -> list:
@@ -267,11 +291,10 @@ def lcs(A, B: list) -> list:
 		if F[len(A)][j] > F[len(A)][j-1]:
 			subseq = [B[j-1]] + subseq
 		j = j - 1
-	subseq.sort()
 	return subseq
 
 
-def smd(A:list) -> list:
+def smd(A: list) -> list:
 	"""For numeric sequence find nonseparate subsequence of elements
 	(number) for which difference between last and first elements
 	is maximal -- like our sequence is a row of daily prces,
