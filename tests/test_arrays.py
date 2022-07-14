@@ -2,6 +2,7 @@ from algo.arrays import *
 
 
 def help():
+	print("test_in_order()")
 	print("# Sorting functions: #")
 	print("test_is_sorted()")
 	print("test_insert_sort()")
@@ -31,10 +32,26 @@ def general_test(fun, input, output_cor):
 			flag = False
 			print(
 				"Fail: {}({}) = {}, must be {}"\
-				.format(fun.__name__,i, o, o_c)
+				.format(fun.__name__, i, o, o_c)
 			)
 	if flag:
 		print("Test passed")
+
+
+def test_in_order():
+	general_test(
+		in_order,
+		[[-2, -1],
+		 [2, 1],
+		 [0, -1, True, False],
+		 [0, 0, True, False],
+		 [-1, -2, False],
+		 [1, 2, False],
+		 [1, 1, False, False],
+		 [4, 6, False, False],
+		 [4, 4, False, True]],
+		[True, False, False, True, True, False, True, False, False]
+	)
 
 
 ## Test sorting algorithms for correctness.
@@ -110,17 +127,28 @@ def test_circ_shift():
 
 # Add test_search_binary()
 
-# Add test_lms()
-
-# Add test_lcs()
-def test_subarray_common_max():
+def test_lms():
 	general_test(
-		subarray_common_max,
+		lms,
+		[[[1, 2, 3, 0, 1]],
+		 [[3, 2, 2, 3, 4, 1, 1], True, False],
+		 [[-1, 0, 1, 1, 0, 3, -2], False],
+		 [[-1, 0, 1, 1, 0, -2, -1], False, False]],
+		[[1, 2, 3],
+		 [2, 2, 3, 4],
+		 [1, 0],
+		 [1, 1, 0, -2]]
+	)
+
+
+def test_lcs():
+	general_test(
+		lcs,
 		[[[1, 2, 3, 0, 1], [4, 2, 2, 5, 6]],
 		 [[1, 2, 2, 3 ,4, 1, 1], [6, 2, 1, 5]],
 		 [[-1, 0, 1, 0], [4, 3, -2, 0]]],
 		[[2],
-		 [1, 2],
+		 [2, 1],
 		 [0]]
 	)
 
