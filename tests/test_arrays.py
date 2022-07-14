@@ -12,9 +12,9 @@ def help():
 	print("######################")
 	print("test_circ_shift()")
 	print("test_search_binary()")
-	print("test_subarray_mono_max()")
-	print("test_subarray_common_max()")
-	print("test_subarray_nsep_max_diff()")
+	print("test_lms()")
+	print("test_lcs()")
+	print("test_smd()")
 
 
 def general_test(fun, input, output_cor):
@@ -110,9 +110,9 @@ def test_circ_shift():
 
 # Add test_search_binary()
 
-# Add test_subarray_mono_max()
+# Add test_lms()
 
-# Add test_subarray_common_max()
+# Add test_lcs()
 def test_subarray_common_max():
 	general_test(
 		subarray_common_max,
@@ -124,7 +124,7 @@ def test_subarray_common_max():
 		 [0]]
 	)
 
-# Add test_subarray_nsep_max_diff()
+# Add test_smd()
 
 if __name__ == '__main__':
 	print("Testing is_sorted():")

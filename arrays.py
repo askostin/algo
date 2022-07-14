@@ -239,12 +239,12 @@ def search_binary(x, A, is_asc):
 	return (find_lbound(x, A), find_rbound(x, A))
 
 
-def subarray_mono_max(A: list, ascending = True, strict_mono = True):
-	""" Find maximal monotonous ascending (or descending) subarray of @A.
+def lms(A: list, ascending = True, strict_mono = True):
+	""" Find longest monotonous ascending (or descending) subsequence of @A.
 
 	Paramenters:
-	@ascending - if we look for ascending or descending subarray
-	@strict_mono - if the subarray is strictly monotonous, i.e.
+	@ascending - if we look for ascending or descending subsequence
+	@strict_mono - if the subsequence is strictly monotonous, i.e.
 		if sequence [a_1, a_2, ..., a_n] is ascending:
 		- a_{n} < a_{n+1} for any n in strictly monotonous seqence,
 		- a_{n} <= a_{n+1} for any n in non-strictly monotonous sequence.
@@ -252,8 +252,8 @@ def subarray_mono_max(A: list, ascending = True, strict_mono = True):
 	pass
 
 
-def subarray_common_max(A, B: list) -> list:
-	""" For two given arrays find their maximal common subarray.
+def lcs(A, B: list) -> list:
+	""" For two given sequences find their longest common subsequenc.
 	"""
 	F = [[0]*(len(B)+1) for i in range(len(A)+1)]
 	for i in range(1, len(A)+1):
@@ -262,16 +262,16 @@ def subarray_common_max(A, B: list) -> list:
 				F[i][j] = 1 + F[i-1][j-1]
 			else:
 				F[i][j] = max(F[i-1][j], F[i][j-1])
-	subarray = []
+	subseq = []
 	while (F[len(A)][j] > 0) and (j > 0):
 		if F[len(A)][j] > F[len(A)][j-1]:
-			subarray = [B[j-1]] + subarray
+			subseq = [B[j-1]] + subseq
 		j = j - 1
-	subarray.sort()
-	return subarray
+	subseq.sort()
+	return subseq
 
 
-def subarray_nsep_max_diff(A:list) -> list:
+def smd(A:list) -> list:
 	"""For numeric sequence find nonseparate subsequence of elements
 	(number) for which difference between last and first elements
 	is maximal -- like our sequence is a row of daily prces,
