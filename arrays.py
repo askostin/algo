@@ -1,4 +1,4 @@
-# import operator
+import math
 
 def circ_shift(A: list, direction = 'right', steps = 1):
 	"""
@@ -296,10 +296,53 @@ def lcs(A, B: list) -> list:
 
 
 def smd(A: list) -> list:
-	"""For numeric sequence find nonseparate subsequence of elements
-	(number) for which difference between last and first elements
-	is maximal -- like our sequence is a row of daily prces,
-	and we want to get maximal profit buying at one price
-	and selling at another.
+	"""For numeric sequence find nonseparate subsequence of elements (number)
+	for which difference between last and first elements is maximal --
+	like our sequence is a row of daily prces, and we want to get maximal
+	profit buying at one price and selling at another.
+	When we create auxiliary array from differences of values of two
+	adjacent cells, out task is to find maximal subarray.
 	"""
-	pass
+
+	# find maximal crossing subarray
+	def fmcs(A, low, mid, high):
+		left_sum = float('-inf')
+		sum = 0
+		max_left = mid
+		for i in range(mid, low-1, -1):
+			sum += A[i]
+			if sum > left_sum:
+				left_sum = sum
+				max_left = i
+		right_sum = float('-inf')
+		sum = 0
+		max_right = mid + 1
+		for j in range(mid+1, high+1):
+			sum += A[j]
+			if sum > right_sum:
+				right_sum = sum
+				max_right = j
+		return max_left, max_right, left_sum + right_sum
+
+	# find maximal subarray
+	def fms(A, low, high):
+		if high == low:
+			return (low, high, A[low])
+		mid = math.floor((low + high)/2)
+		left_low, left_high, left_sum = fms(A, low, mid)
+		cross_low, cross_high, cross_sum = fmcs(A, low, mid, high)
+		right_low, right_high, right_sum = fms(A, mid+1, high)
+		if (left_sum >= right_sum) and (left_sum >= cross_sum):
+			return left_low, left_high, left_sum
+		elif (right_sum >= left_sum) and (right_sum >= cross_sum):
+			return right_low, right_high, right_sum
+		else:
+			return cross_low, cross_high, cross_sum
+
+	if (len(A) <= 2):
+		return A
+	A1 = [0]*(len(A) - 1)
+	for i in range(1, len(A)):
+		A1[i-1] = A[i] - A[i-1]
+	low, high, sum = fms(A1, 0, len(A1)-1)
+	return A[low:high+2]
