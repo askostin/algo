@@ -125,7 +125,18 @@ def test_circ_shift():
 		return "Test 3 failed"
 
 
-# Add test_search_binary()
+def test_search_binary():
+	general_test(
+		search_binary,
+		[[4, range(1, 10), True],
+		 [4, range(9, 0, -1), False],
+		 [4, range(0, 4), True],
+		 [3, [1, 1, 2, 2, 3, 3], True]],
+		[(2, 4),
+		 (4, 6),
+		 (3, 4),
+		 (3, 6)]
+	)
 
 def test_lms():
 	general_test(
@@ -152,7 +163,18 @@ def test_lcs():
 		 [0]]
 	)
 
-# Add test_smd()
+
+def test_smd():
+	general_test(
+		smd,
+		[[[100, 113, 110, 85, 105, 102, 86, 63,
+		   81, 101, 94, 106, 101, 79, 94, 90, 97]],
+		 [[1, 2]],
+		 [[0, 5, -6, -4, 0, -3, -1]]],
+		[[63, 81, 101, 94, 106],
+		 [1, 2],
+		 [-6, -4, 0]]
+	)
 
 if __name__ == '__main__':
 	print("Testing is_sorted():")
@@ -168,5 +190,4 @@ if __name__ == '__main__':
 	test_sort(merge_sort, inplace = False)
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
-
 
