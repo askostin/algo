@@ -20,17 +20,32 @@ def rows_word(n_rows: int) :
 
 def match(str, pat: str)-> bool:
 	"""
-	Compare string with pattern and return True if there is any match. It finds only first match.
+	Compare string with pattern and return True if there is any match.
+	It finds only first match.
 	Pattern scheme:
 		- [a-zA-Z0-9] - one alphabet symbol or digit
 		- '*' : any symbols, occur zero or more times
 		- '.' : any symbols, occur one or more times
 	"""
-	def match_aux(str, pat: str, str_pos, pat_pos: int)-> bool:
-		pass
+	def match_aux(str, pat: str, str_pos, pat_pos: int) -> bool:
+		while 1:
+			if (pat_pos >= len(pat)):
+				return (str_pos >= len(str))
+			if (pat[pat_pos] == '*') and (str_pos >= len(str)):
+				return match_aux(str, pat, str_pos, pat_pos+1)
+			if (pat[pat_pos] == '*'):
+				for i in range(0, len(str)-str_pos):
+					if match_aux(str, pat, str_pos+i, pat_pos+1):
+						return True
+				return False
+			if ((str_pos >= len(str)) or
+				((str[str_pos] != pat[pat_pos]) and (pat[pat_pos] != '?'))):
+				return False
+			str_pos += 1
+			pat_pos += 1
 
-	return match_aux(str, pat, 0, 0) 
+	return match_aux(str, pat, 0, 0)
 
 
 # def check_paren(...)
-# check the expressin which have parenthesises for pair matching
+# check the expressin which have parentheses for pair matching
