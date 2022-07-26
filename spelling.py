@@ -47,7 +47,7 @@ def match(str, pat: str)-> bool:
 	return match_aux(str, pat, 0, 0)
 
 
-def check_paren(s, print_output = True) -> int:
+def check_paren(s: str, print_output = True) -> int:
 	""" Check the expresson which have parentheses for pair matching.
 	"""
 	stack = []
