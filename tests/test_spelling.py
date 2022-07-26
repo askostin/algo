@@ -30,3 +30,21 @@ def test_match():
 		[['abc', 'a?c'], ['abc', 'a??c'], ['abc', '***a***c***']],
 		[True, False, True]
 	)
+
+
+def test_check_paren():
+	general_test(
+		check_paren,
+		[['()()', False],
+		 ['(([()()])){}[()({})]', False],
+		 [')', False],
+		 ['(', False],
+		 ['((])', False],
+		 ['[()}]', False]],
+		[True,
+		 True,
+		 False,
+		 False,
+		 False,
+		 False]
+	)

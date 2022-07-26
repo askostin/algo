@@ -47,5 +47,27 @@ def match(str, pat: str)-> bool:
 	return match_aux(str, pat, 0, 0)
 
 
-# def check_paren(...)
-# check the expressin which have parentheses for pair matching
+def check_paren(s, print_output = True) -> int:
+	""" Check the expresson which have parentheses for pair matching.
+	"""
+	stack = []
+	openers = ['(', '{', '[']
+	pairs = {')': '(', '}': '{', ']': '['}
+	for i in range(len(s)):
+		if s[i] in openers:
+			stack.append(s[i])
+		elif not stack:
+			if print_output:
+				print(f"Inconsistent bracket at position {i}: '{s[i]}'")
+			return False
+		else:
+			if (pairs[s[i]] != stack.pop()):
+				if print_output:
+					print(f"Inconsistent bracket at position {i}: '{s[i]}'")
+				return False
+	if not stack:
+		return True
+	else:
+		if print_output:
+			print(f"Inconsistent bracket at position {i}: '{s[i]}'")
+		return False
