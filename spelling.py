@@ -71,3 +71,21 @@ def check_paren(s: str, print_output = True) -> int:
 		if print_output:
 			print(f"Inconsistent bracket at position {i}: '{s[i]}'")
 		return False
+
+
+def levenstein(s1, s2: str) -> bool:
+	""" Compute Levenstein distance between two strings
+	"""
+	if not s1:
+		return len(s2)
+	elif not s2:
+		return len(s1)
+	L = [[(i + j) if (i*j == 0) else 0 for j in range(len(s2) + 1)]
+		 for i in range(len(s1) + 1)]
+	for i in range(1, len(s1) + 1):
+		for j in range(1, len(s2) + 1):
+			if (s1[i-1] == s2[j-1]):
+				L[i][j] = L[i-1][j-1]
+			else:
+				L[i][j] = 1 + min(L[i][j-1], L[i-1][j], L[i-1][j-1])
+	return L[-1][-1]
