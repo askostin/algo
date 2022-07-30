@@ -112,9 +112,6 @@ def prefix(s: str, full_array = False):
 	else:
 		return pref[-1]
 
-str1 = 'aabaabaaabaaba'
-str2 = 'aabaabaaaabaabaaab'
-
 
 def kmp(sub, s):
 	""" Knuth-Morris-Pratt algo realisation.
@@ -126,8 +123,8 @@ def kmp(sub, s):
 		return []
 	F = prefix(sub+'#'+s, True)[len(sub)+1:]
 	matches = [
-		(i - len(sub))
-		for i in range(2*len(sub)+1,len(F))
+		(i - len(sub) + 1)
+		for i in range(len(sub)-1,len(F))
 		if (F[i] == len(sub))
 		]
 	return matches

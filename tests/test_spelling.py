@@ -5,6 +5,7 @@ def help():
 	print("test_check_paren()")
 	print("test_levenstein()")
 	print("test_prefix()")
+	print("test_kmp()")
 
 
 def general_test(fun, input, output_cor):
@@ -83,8 +84,22 @@ def test_prefix():
 )
 
 
+def test_kmp():
+	general_test(
+		s.kmp,
+		[['ab', 'ababab'],
+		 ['','34r'],
+		 ['mm1', '1mm2'],
+		 ['ac', 'aacababbac']],
+		[[0, 2, 4],
+		 [],
+		 [],
+		 [1, 8]]
+	)
+
 if __name__ == "__main__":
 	test_match()
 	test_check_paren()
 	test_levenstein()
 	test_prefix()
+	test_kmp()
