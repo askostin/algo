@@ -51,6 +51,19 @@ test_arrays_sorted_desc = \
 	 [4, 4, 2, 2, 1]]
 
 
+def test_is_sorted():
+	general_test(
+		is_sorted,
+		[[input] for input in
+		 test_arrays +
+			test_arrays_sorted_asc +
+			test_arrays_sorted_desc
+		 ],
+		[(0, None), (0, None), (0, None),
+		 (1, 1), (1, 1), (1, 1),
+		 (1, 0), (1, 0), (1, 0)]
+		)
+
 def apply_sort_algo(sort_algorithm, A, A_sorted_correct, ascending, inplace):
 	order = 'ascending' if ascending else 'descending'
 	if inplace:
@@ -158,7 +171,7 @@ def test_smd():
 	)
 
 if __name__ == '__main__':
-	print("Testing is_sorted():")
+	test_in_order()
 	test_is_sorted()
 
 	test_sort(insert_sort)
