@@ -112,9 +112,22 @@ def prefix(s: str, full_array = False):
 	else:
 		return pref[-1]
 
+str1 = 'aabaabaaabaaba'
+str2 = 'aabaabaaaabaabaaab'
+
 
 def kmp(sub, s):
-	""" Find substring @sub in the string @s.
-	Knuth-Morris-Pratt algo realisation.
+	""" Knuth-Morris-Pratt algo realisation.
+	Find substring @sub in the string @s and return list of indexes
+	where each index corresponds to the symbol, from which symbols in
+	@s match all symbols in @sub.
 	"""
-	F = prefix(sub+'#'+str)
+	if len(sub)*len(s) < 1:
+		return []
+	F = prefix(sub+'#'+s, True)[len(sub)+1:]
+	matches = [
+		(i - len(sub))
+		for i in range(2*len(sub)+1,len(F))
+		if (F[i] == len(sub))
+		]
+	return matches

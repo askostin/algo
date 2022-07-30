@@ -74,16 +74,17 @@ def test_prefix():
 		s.prefix,
 		[['aabaa'],
 		 ['aabaab'],
-		 ['aabaabaaaabaabа'],
-		 ['aabaabaaaabaabаaab', True]],
+		 ['aabaabaaaabaaba'],
+		 ['aabaabaaaabaabaaab', True]],
 		[2,
 		 3,
 		 7,
 		 [0, 1, 0, 1, 2, 3, 4, 5, 2, 2, 3, 4, 5, 6, 7, 8, 9, 3]]
 )
 
-def test_prefix2():
-	print(s.prefix('aabaa'))
-	print(s.prefix('aabaab'))
-	print(s.prefix('aabaabaaaabaabа', True))
-	print(s.prefix('aabaabaaaabaabаaab', True))
+
+if __name__ == "__main__":
+	test_match()
+	test_check_paren()
+	test_levenstein()
+	test_prefix()
