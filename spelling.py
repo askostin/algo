@@ -89,3 +89,32 @@ def levenstein(s1, s2: str) -> bool:
 			else:
 				L[i][j] = 1 + min(L[i][j-1], L[i-1][j], L[i-1][j-1])
 	return L[-1][-1]
+
+
+def prefix(s: str, full_array = False):
+	""" Prefix-function.
+	"""
+	if not s:
+		if full_array:
+			return []
+		else:
+			return 0
+	pref = [0 for i in range(len(s))]
+	for i in range(1, len(s)):
+		p = pref[i-1]
+		while p > 0 and s[i] != s[p]:
+			p = pref[p-1]
+		if s[i] == s[p]:
+			p += 1
+		pref[i] = p
+	if full_array:
+		return pref
+	else:
+		return pref[-1]
+
+
+def kmp(sub, s):
+	""" Find substring @sub in the string @s.
+	Knuth-Morris-Pratt algo realisation.
+	"""
+	F = prefix(sub+'#'+str)

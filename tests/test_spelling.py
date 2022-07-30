@@ -1,9 +1,10 @@
-from algo.spelling import *
+import algo.spelling as s
 
 def help():
 	print("test_match()")
 	print("test_check_paren()")
 	print("test_levenstein()")
+	print("test_prefix()")
 
 
 def general_test(fun, input, output_cor):
@@ -28,7 +29,7 @@ def general_test(fun, input, output_cor):
 
 def test_match():
 	general_test(
-		match,
+		s.match,
 		[['abc', 'a?c'], ['abc', 'a??c'], ['abc', '***a***c***']],
 		[True, False, True]
 	)
@@ -36,7 +37,7 @@ def test_match():
 
 def test_check_paren():
 	general_test(
-		check_paren,
+		s.check_paren,
 		[['()()', False],
 		 ['(([()()])){}[()({})]', False],
 		 [')', False],
@@ -54,7 +55,7 @@ def test_check_paren():
 
 def test_levenstein():
 	general_test(
-		levenstein,
+		s.levenstein,
 		[['aaa', 'aaa'],
 		 ['333-a1', '333-a'],
 		 ['kitten', 'sitting'],
@@ -66,3 +67,23 @@ def test_levenstein():
 		 3,
 		 6]
 	)
+
+
+def test_prefix():
+	general_test(
+		s.prefix,
+		[['aabaa'],
+		 ['aabaab'],
+		 ['aabaabaaaabaabа'],
+		 ['aabaabaaaabaabаaab', True]],
+		[2,
+		 3,
+		 7,
+		 [0, 1, 0, 1, 2, 3, 4, 5, 2, 2, 3, 4, 5, 6, 7, 8, 9, 3]]
+)
+
+def test_prefix2():
+	print(s.prefix('aabaa'))
+	print(s.prefix('aabaab'))
+	print(s.prefix('aabaabaaaabaabа', True))
+	print(s.prefix('aabaabaaaabaabаaab', True))
