@@ -96,16 +96,18 @@ def king_count_paths(M, N: int, *, ret_all = False):
 		return K[M][N]
 
 
-def backpack(M: int, goods: list) -> list:
+def backpack(M: int, goods: dict) -> list:
 	"""
-	Find optimal selection of goods, described by list of pairs (m_i, v_i) of
-	masses (volumes) m_i and values v_i, for backpack (inventory) with maximal
-	payload (volume) M.
+	Find optimal selection of goods, described by dictionary
+	{'items': listof('name'), 'masses': listof(m_i), 'values': listof(v_i)},
+	where m_i - mass (volume) of item, v_i - value (price) of item,
+	for backpack (inventory) with maximal payload (volume) M.
 	"""
-	N = len(goods)
-	m = [0] + [goods[i][0] for i in range(N)]
-	v = [0] + [goods[i][1] for i in range(N)]
-	F = [[0]*(N+1) for i in range(M + 1)]
+	N = len(goods['items'])
+	assert N == len(list(set(goods['items'])))
+	m = [0] + [goods['masses'][i] for i in range(N)]
+	v = [0] + [goods['values'][i] for i in range(N)]
+	F = [[0]*(N + 1) for i in range(M + 1)]
 	for i in range(1, N + 1):
 		for j in range(1, M + 1):
 			if m[i] <= M:
