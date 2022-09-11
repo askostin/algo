@@ -1,5 +1,6 @@
 # Tests for functions, making path search, select, count.
 from algo.paths import *
+from algo.tests.test import general_test
 
 def test_grasshoper_count_paths():
 	args_sets = [
@@ -50,6 +51,22 @@ def test_king_count_paths():
 		print("\n")
 
 
+def test_backpack():
+	general_test(
+		backpack,
+		[[4,
+		  ['tablet', 'TV', 'notebook', 'iphone'],
+		  [1, 4, 3, 1],
+		  [1500, 3000, 2000, 2000],
+		  True]
+		 ],
+		[[[1500, 1500, 1500, 1500],
+		  [1500, 1500, 1500, 3000],
+		  [1500, 1500, 2000, 3500],
+		  [2000, 3500, 3500, 4000]]]
+	)
+
+
 if __name__ == '__main__':
 	print("\nTesting grasshoper_count_paths():")
 	test_grasshoper_count_paths()
@@ -59,3 +76,6 @@ if __name__ == '__main__':
 
 	print("\nTesing king_count_paths():")
 	test_king_count_paths()
+
+	print("\nTesing backpack():")
+	test_backpack()
