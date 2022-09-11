@@ -3,6 +3,7 @@
 # count number of possible paths.
 # Here we implement some algorithms of 'dynamic programming'.
 
+import numpy as np
 
 def grasshoper_count_paths(N: int, steps = [1, 2, 3], forbidden = []):
 	"""Find number of possible path variants in the 1D road with @N+1 points
@@ -96,14 +97,14 @@ def king_count_paths(M, N: int, *, ret_all = False):
 		return K[M][N]
 
 
-def backpack(M: int, names, m, v) -> list:
+def backpack(M: int, names, m, v: list, test_output = False) -> list:
 	"""
 	Find optimal selection of goods, described by lists of
 	names @names[i], masses (volumes) @m[i], values (prices) @ v[i],
 	for backpack (inventory) with maximal payload (volume) M.
 	"""
 	N = len(names)
-	assert N == len(list(set(goods['items']))) and
+	assert (N == len(list(set(names)))) and \
 		((N == len(m)) and (N == len(v)))
 	m = [0] + [m[i] for i in range(N)]
 	v = [0] + [v[i] for i in range(N)]
@@ -114,4 +115,7 @@ def backpack(M: int, names, m, v) -> list:
 				F[i][j] = max(F[i-1][j], v[i] + F[i-1][j - m[i]])
 			else:
 				F[i][j] = F[i-1][j]
-	return(F[M][N])
+	if test_output:
+		return (np.array(F)[1:N+1, 1:M+1].tolist())
+	else:
+		return F[N][M]
