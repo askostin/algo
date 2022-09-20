@@ -141,7 +141,7 @@ class Heap_min:
 			if rc:
 				more_than_right = in_order(self.values[rc], self.values[i])
 				if more_than_left and more_than_right:
-					if (self.values[lc] <= self.values[rc]):
+					if (self.values[lc] < self.values[rc]):
 						j = lc
 					else:
 						j = rc
@@ -207,10 +207,10 @@ class Heap_max:
 			if rc:
 				less_than_right = (self.values[rc] > self.values[i])
 				if less_than_left and less_than_right:
-					if (self.values[lc] <= self.values[rc]):
-						j = lc
-					else:
+					if (self.values[lc] < self.values[rc]):
 						j = rc
+					else:
+						j = lc
 				elif less_than_left:
 					j = lc
 				elif less_than_right:

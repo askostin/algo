@@ -33,9 +33,19 @@ print(h3.values)
 print('##########')
 
 h4 = Heap_max()
-a4 = [1, 2, 4, 5, 3, 4, 8]
+a4 = [8, 4, 5, 1, 2, 4, 3]
 for x in a4:
 	h4.insert(x)
 print(h4.values)
 h4.extract_max()
 print(h4.values)
+
+print('##########')
+
+h5 = Heap_max()
+a5 = [8, 5, 4, 1, 2, 4, 3]
+for x in a5:
+	h5.insert(x)
+print(h5.values)
+h5.extract_max()
+print(h5.values)
