@@ -33,12 +33,14 @@ class Heap:
 	def sift_up(self, i):
 		if (i > 0):
 			j = self.parent(i)
-		while (i > 0) and \
+		while (
+			(i > 0) and \
 			in_order(
 				self.values[i],
 				self.values[j],
 				is_asc = self.types[self.type]
-				):
+				)
+			):
 			self.values[i], self.values[j] = \
 				self.values[j], self.values[i]
 			i = j
@@ -59,29 +61,26 @@ class Heap:
 
 	def sift_down(self, i):
 		lc = self.child_left(i)
+		is_min_heap = self.types[self.type]
 		while lc:
 			rc = self.child_right(i)
 			j = i
 			compare_lc = in_order(
 				self.values[lc],
 				self.values[i],
-				# In incorrect Min_Heap child < parent (descending order)
-				# and is_asc = 1 = types['min'].
-				# In incorrect Max_Heap child > parent (ascending order)
-				# and is_asc = 0 = types['max'].
-				is_asc = self.types[self.type]
+				is_asc = is_min_heap
 				)
 			if rc:
 				compare_rc = in_order(
 					self.values[rc],
 					self.values[i],
-					is_asc = self.types[self.type]
+					is_asc = is_min_heap
 					)
 				if compare_lc and compare_rc:
 					if in_order(
 						self.values[rc],
 						self.values[lc],
-						is_asc = self.types[self.type]
+						is_asc = is_min_heap
 						):
 						j = lc
 					else:
