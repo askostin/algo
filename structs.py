@@ -78,8 +78,8 @@ class Heap:
 					)
 				if compare_lc and compare_rc:
 					if in_order(
-						self.values[rc],
 						self.values[lc],
+						self.values[rc],
 						is_asc = is_min_heap
 						):
 						j = lc
@@ -93,6 +93,8 @@ class Heap:
 				j = lc
 			if i==j:
 				break
+			print(f"parent (n[{i}] = {self.values[i]}) <-> " +
+				  f"child (n[{j}] = {self.values[j]})")
 			self.values[i], self.values[j] = self.values[j], self.values[i]
 			i = j
 			lc = self.child_left(i)

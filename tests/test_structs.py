@@ -53,6 +53,7 @@ print(h5.values)
 print('##########')
 
 print("\nTesting Heap('min'):")
+print('##########')
 h1 = Heap('min')
 a1 = random.sample([1, 2, 3, 10], 4)
 for x in a1:
@@ -71,7 +72,10 @@ print(h2.values)
 h2.extract_root()
 print(h2.values)
 
+print('##########')
+
 print("\nTesting Heap('max'):")
+print('##########')
 h3 = Heap('max')
 a3 = random.sample([1, 2, 3, 10], 4)
 for x in a3:
