@@ -1,16 +1,16 @@
 # Heap implementation
 
-def in_order(n1, n2, asc = True, strict = True):
+def in_order(n1, n2, is_asc = True, strict = True):
 	""" Check if the order of two given numbers is correct. """
 	if strict:
-		return ((n1 < n2) if asc else (n1 > n2))
+		return ((n1 < n2) if is_asc else (n1 > n2))
 	else:
-		return ((n1 <= n2) if asc else (n1 >= n2))
+		return ((n1 <= n2) if is_asc else (n1 >= n2))
 
 class Heap:
 	types = {'min': 1, 'max': 0}
 	def __init__(self, type):
-		if type not in(list(types.keys())):
+		if type not in(list(self.types.keys())):
 			raise ValueError("Heap can be only 'min' or 'max'.")
 		self.type = type
 		self.values = []
@@ -30,17 +30,21 @@ class Heap:
 		self.size += 1
 		self.sift_up(self.size-1)
 
-	def sift_up(self, i, asc_order):
+	def sift_up(self, i):
 		if (i > 0):
 			j = self.parent(i)
 		while (i > 0) and \
-			in_order(self.values[i], self.values[j], is_asc = asc_order):
+			in_order(
+				self.values[i],
+				self.values[j],
+				is_asc = self.types[self.type]
+				):
 			self.values[i], self.values[j] = \
 				self.values[j], self.values[i]
 			i = j
 			j = self.parent(i)
 
-	def extract_min(self):
+	def extract_root(self):
 		if self.size == 0:
 			return None
 		tmp = self.values[0]
@@ -61,19 +65,23 @@ class Heap:
 			compare_lc = in_order(
 				self.values[lc],
 				self.values[i],
-				is_asc = asc_order
+				# In incorrect Min_Heap child < parent (descending order)
+				# and is_asc = 1 = types['min'].
+				# In incorrect Max_Heap child > parent (ascending order)
+				# and is_asc = 0 = types['max'].
+				is_asc = self.types[self.type]
 				)
 			if rc:
 				compare_rc = in_order(
 					self.values[rc],
 					self.values[i],
-					is_asc = asc_order
+					is_asc = self.types[self.type]
 					)
 				if compare_lc and compare_rc:
 					if in_order(
-						self.values[lc],
 						self.values[rc],
-						is_asc = asc_order
+						self.values[lc],
+						is_asc = self.types[self.type]
 						):
 						j = lc
 					else:
