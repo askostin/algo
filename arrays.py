@@ -1,4 +1,5 @@
 import math
+import algo.structs as structs
 
 def circ_shift(A: list, direction = 'right', steps = 1):
 	"""
@@ -298,7 +299,7 @@ def lcs(A, B: list) -> list:
 def smd(A: list) -> list:
 	"""For numeric sequence find nonseparate subsequence of elements (number)
 	for which difference between last and first elements is maximal --
-	like our sequence is a row of daily prces, and we want to get maximal
+	like our sequence is a row of daily prices, and we want to get maximal
 	profit buying at one price and selling at another.
 	When we create auxiliary array from differences of values of two
 	adjacent cells, out task is to find maximal subarray.
@@ -346,3 +347,19 @@ def smd(A: list) -> list:
 		A1[i-1] = A[i] - A[i-1]
 	low, high, sum = fms(A1, 0, len(A1)-1)
 	return A[low:high+2]
+
+
+def heap_sort(A: list, ascending = True, inplace = True):
+	""" Heap sort.
+	"""
+	if not A:
+		raise ValueError('Input list must be not empty.')
+	h = structs.Heap('min') if ascending else structs.Heap('min')
+	for x in A:
+		h.insert(x)
+	if inplace:
+		A = h.values
+		# for i in range(len(A)):
+		#	A[i] = h.values[i]
+	else:
+		return h.values
