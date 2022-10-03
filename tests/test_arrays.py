@@ -6,11 +6,15 @@ def help():
 	print("test_in_order()")
 	print("# Sorting functions: #")
 	print("test_is_sorted()")
-	print("test_insert_sort()")
-	print("test_choice_sort()")
-	print("test_bubble_sort()")
-	print("test_merge_sort()")
-	print("test_hoar_sort()")
+	print("test_apply_sort_algo()")
+	print("test_sort()")
+	print("are applied to:")
+	print("- insert sort,")
+	print("- choice sort,")
+	print("- bubble sort,")
+	print("- merge sort,")
+	print("- hoar sort,")
+	print("- heap sort.")
 	print("######################")
 	print("test_circ_shift()")
 	print("test_search_binary()")
@@ -170,6 +174,7 @@ def test_smd():
 		 [-6, -4, 0]]
 	)
 
+
 if __name__ == '__main__':
 	test_in_order()
 	test_is_sorted()
@@ -184,4 +189,5 @@ if __name__ == '__main__':
 	test_sort(merge_sort, inplace = False)
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
-
+	test_sort(heap_sort)
+	test_sort(hoar_sort, inplace = False)
