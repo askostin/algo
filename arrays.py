@@ -354,12 +354,17 @@ def heap_sort(A: list, ascending = True, inplace = True):
 	"""
 	if not A:
 		raise ValueError('Input list must be not empty.')
-	h = structs.Heap('min') if ascending else structs.Heap('min')
+	h = structs.Heap('max') if ascending else structs.Heap('min')
 	for x in A:
 		h.insert(x)
+	N = len(A)
+	tmp = [0]*N
+	i = N-1
+	while i >= 0:
+		tmp[i] = h.extract_root()
+		i -= 1
 	if inplace:
-		A = h.values
-		# for i in range(len(A)):
-		#	A[i] = h.values[i]
+		for i in range(N):
+			A[i] = tmp[i]
 	else:
-		return h.values
+		return tmp
