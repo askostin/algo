@@ -93,8 +93,8 @@ class Heap:
 				j = lc
 			if i==j:
 				break
-			print(f"parent (n[{i}] = {self.values[i]}) <-> " +
-				  f"child (n[{j}] = {self.values[j]})")
+#			print(f"parent (n[{i}] = {self.values[i]}) <-> " +
+#				  f"child (n[{j}] = {self.values[j]})")
 			self.values[i], self.values[j] = self.values[j], self.values[i]
 			i = j
 			lc = self.child_left(i)
