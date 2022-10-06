@@ -54,7 +54,6 @@ test_arrays_sorted_desc = \
 	 list(range(19, -1, -1)),
 	 [4, 4, 2, 2, 1]]
 
-
 def test_is_sorted():
 	general_test(
 		is_sorted,
@@ -104,6 +103,11 @@ def test_sort(sort_algorithm, inplace = True):
 			inplace = inplace
 		)
 
+def tmp_test_heap_sort():
+	for A in test_arrays:
+		print(f"unsorted: {A}")
+		heap_sort(A)
+		print(f"sorted: {A}")
 
 ## Tests for non-sorting functions
 
@@ -190,4 +194,4 @@ if __name__ == '__main__':
 	test_sort(hoar_sort)
 	test_sort(hoar_sort, inplace = False)
 	test_sort(heap_sort)
-	test_sort(hoar_sort, inplace = False)
+	test_sort(heap_sort, inplace = False)
