@@ -78,7 +78,7 @@ def is_sorted(A: list):
 
 
 def insert_sort(A: list, ascending = True, inplace = True):
-	""" Sorting array by insertion sort. """
+	""" Sorting array by insertion sort ~O(n)...O(n^2). """
 	N = len(A)
 	C = A if inplace else [x for x in A]
 	for i in range(1, N):
@@ -93,7 +93,7 @@ def insert_sort(A: list, ascending = True, inplace = True):
 
 
 def choice_sort(A: list, ascending = True, inplace = True):
-	""" Sorting array by choice sort. """
+	""" Sorting array by choice sort ~O(n^2). """
 	N = len(A)
 	C = A if inplace else [x for x in A]
 	for i in range(N):
@@ -110,7 +110,7 @@ def choice_sort(A: list, ascending = True, inplace = True):
 
 
 def bubble_sort(A: list, ascending = True, inplace = True):
-	""" Sorting array by bubble sort. """
+	""" Sorting array by bubble sort ~O(n)...O(n^2). """
 	N = len(A)
 	C = A if inplace else [x for x in A]
 	for i in range(N-1):
@@ -152,7 +152,7 @@ def merge(A1, A2: list, ascending = True):
 
 
 def merge_sort(A: list, ascending = True, inplace = True):
-	""" Sorting array by merge sort. """
+	""" Sorting array by merge sort ~O(n log(n)). """
 	if inplace:
 		if (len(A) <= 1):
 			return
@@ -174,7 +174,7 @@ def merge_sort(A: list, ascending = True, inplace = True):
 
 
 def hoar_sort(A, ascending = True, inplace = True):
-	""" Sorting array by fast Hoar sort. """
+	""" Sorting array by fast Hoar sort ~O(n log(n)...O(n^2). """
 	C = A if inplace else [x for x in A]
 	if len(A) <= 1:
 		if inplace:
@@ -350,8 +350,7 @@ def smd(A: list) -> list:
 
 
 def heap_sort(A: list, ascending = True, inplace = True):
-	""" Heap sort.
-	"""
+	""" Heap sort ~O(n log(n)). """
 	if not A:
 		raise ValueError('Input list must be not empty.')
 	h = structs.Heap('max') if ascending else structs.Heap('min')
