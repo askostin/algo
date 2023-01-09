@@ -367,3 +367,19 @@ def heap_sort(A: list, ascending = True, inplace = True):
 			A[i] = tmp[i]
 	else:
 		return tmp
+
+
+def count_inversions(A:list, ascending = True):
+	"""Count all inversions in the array A, which means that
+	inversion count increases for two indexes i and j if:
+	- A[i] > A[j] for increasing sort order,
+	- A[i] < A[j] for decreasing sort order.
+	"""
+	counter = 0
+	if len(A) < 2:
+		return 0
+	for i in range(len(A)-1):
+		for j in range(i, len(A)):
+			if in_order(A[i], A[j], not ascending):
+				counter += 1
+	return counter
